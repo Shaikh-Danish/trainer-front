@@ -1,10 +1,8 @@
 import "./App.css";
 import Login from "./components/Login/Login";
-// import Home from "./components/Home/Home";
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
-// import SignIn from './components/Login/SignIn'
 
 function App() {
   return (
