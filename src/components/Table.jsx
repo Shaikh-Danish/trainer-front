@@ -2,13 +2,11 @@
 import { useState, useRef } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 
-import "./Table.css";
+import EditModal from "./EditModal";
+import DeleteModal from "./DeleteModal";
+import AddNewModal from "./AddNewModal";
 
-import EditModal from "./../Modal/EditModal";
-import DeleteModal from "./../Modal/DeleteModal";
-import AddNewModal from "./../Modal/AddNewModal";
-
-import { getUniqueKey } from "./../utils/utils";
+import { getUniqueKey } from "./utils/utils";
 
 function Table({ data }) {
   data = data.map((dt) => {

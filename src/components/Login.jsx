@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-// import axios from "axios";
-import "./Login.css";
+import FormGroup from "./FormGroup";
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,10 +17,8 @@ const LoginPage = () => {
         credentials: "include",
       });
 
-      console.log(res)
-
       if (res.status === 200 && res.ok) {
-        navigate("/dashboard");
+        navigate("/");
       } 
     };
     authenticate();
@@ -51,47 +49,25 @@ const LoginPage = () => {
       body: JSON.stringify(data),
       credentials: "include",
     });
-    // console.log(res.status);
 
     if (res.status === 200 && res.ok) {
       navigate("/");
     }
-    // console.log(response.headers)
-    // const data1 = await response.json()
-
-    // const expirationTime = new Date(Date.now() + 3600000)
-    // document.cookie = `token=${data1.token};path=/;expires=${expirationTime}`
   };
 
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2>Login</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           <Form>
-            <div className="form-group">
-              <label>Email</label>
-              <Field type="email" name="email" />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="error-message"
-              />
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <Field type="password" name="password" />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="error-message"
-              />
-            </div>
-            <button type="submit">Login</button>
+          <h2>Login</h2>
+            <FormGroup formName="Email" />
+            <FormGroup formName="Password" />
+            <button type="submit" className="login">Login</button>
           </Form>
         </Formik>
       </div>

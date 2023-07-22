@@ -1,21 +1,21 @@
-/* eslint-disable react/prop-types */
 import { Formik, Form, Field } from "formik";
 
 import Modal from "./Modal";
-import "./Modal.css";
-import { getUniqueKey } from "../utils/utils";
+import { getUniqueKey } from "./utils/utils";
 
 
-function AddNewModal({ closeModal, updateLinks, rows }) {
+function EditModal({ link , closeModal, updateLinks, rows }) {
   const initialValues = {
+    id: "",
     link: ""
   };
   
   const handleSubmit = async (values) => {
-    const url = "https://trainer-portal.surajmehta6.repl.co/dashboard";
+    const url = "https://trainer-portal.surajmehta6.repl.co/edit"
     
     const data = {
-      link: values.link
+      oldLink: link.current.link,
+      newLink: values.link
     }
 
     const res = await fetch(url, {
@@ -26,10 +26,11 @@ function AddNewModal({ closeModal, updateLinks, rows }) {
       body: JSON.stringify(data),
       credentials: "include",
     });
-    const {status} = await res.json();
+    const {status } = await res.json();
     
-    if (status === 201) {
+    if (status === 200) {
       rows.push({id: getUniqueKey(), link: values.link})
+      rows = rows.filter(row => row.id !== link.current.id)
       updateLinks(rows)
 
       closeModal()
@@ -38,7 +39,7 @@ function AddNewModal({ closeModal, updateLinks, rows }) {
 
   return (
     <Modal>
-      <h3>Add New Link</h3>
+      <h3>Edit Link</h3>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <div className="form-group">
@@ -53,4 +54,4 @@ function AddNewModal({ closeModal, updateLinks, rows }) {
   );
 }
 
-export default AddNewModal;
+export default EditModal;

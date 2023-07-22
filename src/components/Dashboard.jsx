@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Table from "../Table/Table";
+import Table from "./Table";
 
-function Home() {
+function Dashboard() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [links, setLinks] = useState([]);
@@ -22,7 +22,7 @@ function Home() {
       } else if (res.status === 200 && res.ok) {
         setIsLoggedIn(true);
         setLinks(data.links);
-        navigate("/dashboard");
+        navigate("/");
       }
     };
     authenticate();
@@ -31,4 +31,4 @@ function Home() {
   return <>{isLoggedIn && <Table data={links} />}</>;
 }
 
-export default Home;
+export default Dashboard;

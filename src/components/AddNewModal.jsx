@@ -2,22 +2,19 @@
 import { Formik, Form, Field } from "formik";
 
 import Modal from "./Modal";
-import "./Modal.css";
-import { getUniqueKey } from "./../utils/utils";
+import { getUniqueKey } from "./utils/utils";
 
 
-function EditModal({ link , closeModal, updateLinks, rows }) {
+function AddNewModal({ closeModal, updateLinks, rows }) {
   const initialValues = {
-    id: "",
     link: ""
   };
   
   const handleSubmit = async (values) => {
-    const url = "https://trainer-portal.surajmehta6.repl.co/edit"
+    const url = "https://trainer-portal.surajmehta6.repl.co/dashboard";
     
     const data = {
-      oldLink: link.current.link,
-      newLink: values.link
+      link: values.link
     }
 
     const res = await fetch(url, {
@@ -28,11 +25,10 @@ function EditModal({ link , closeModal, updateLinks, rows }) {
       body: JSON.stringify(data),
       credentials: "include",
     });
-    const {status } = await res.json();
+    const {status} = await res.json();
     
-    if (status === 200) {
+    if (status === 201) {
       rows.push({id: getUniqueKey(), link: values.link})
-      rows = rows.filter(row => row.id !== link.current.id)
       updateLinks(rows)
 
       closeModal()
@@ -41,7 +37,7 @@ function EditModal({ link , closeModal, updateLinks, rows }) {
 
   return (
     <Modal>
-      <h3>Edit Link</h3>
+      <h3>Add New Link</h3>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <div className="form-group">
@@ -56,4 +52,4 @@ function EditModal({ link , closeModal, updateLinks, rows }) {
   );
 }
 
-export default EditModal;
+export default AddNewModal;

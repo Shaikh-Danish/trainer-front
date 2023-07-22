@@ -2,7 +2,6 @@
 import { Formik, Form } from "formik";
 
 import Modal from "./Modal";
-import "./Modal.css";
 
 
 function DeleteModal({ link , closeModal, updateLinks, rows }) {
