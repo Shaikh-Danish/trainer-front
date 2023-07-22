@@ -1,79 +1,109 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, useRef } from "react";
+import { MdEdit, MdDelete } from "react-icons/md";
 
-import './Table.css'
+import "./Table.css";
 
-function Table() {
-    const [rows, setRows] = useState([
-        { id: 1, link: 'Column Link 1' },
-        { id: 2, link: 'Column Link 2' },
-        { id: 3, link: 'Column Link 3' },
-      ]);
-    
-      const addRow = () => {
-        const newRow = {
-          id: rows.length + 1,
-          link: `Column Link ${rows.length + 1}`,
-        };
-        setRows([...rows, newRow]);
-      };
-    
-      const handleEdit = (id) => {
-        console.log(id)
-        // Handle the edit functionality here (if needed).
-      };
-    
-      const handleDelete = (id) => {
-        const updatedRows = rows.filter((row) => row.id !== id);
-        setRows(updatedRows);
-      }
+import EditModal from "./../Modal/EditModal";
+import DeleteModal from "./../Modal/DeleteModal";
+import AddNewModal from "./../Modal/AddNewModal";
+
+import { getUniqueKey } from "./../utils/utils";
+
+function Table({ data }) {
+  data = data.map((dt) => {
+    return { id: getUniqueKey(), link: dt };
+  });
+
+  const [rows, setRows] = useState(data);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const [isNew, setIsNew] = useState(false);
+
+  const linkRef = useRef();
+
+  const addRow = () => {
+    setIsNew(true);
+  };
+
+  const handleEdit = (row) => {
+    linkRef.current = row;
+    setIsEdit(true);
+  };
+
+  const handleDelete = (row) => {
+    linkRef.current = row;
+    setIsDelete(true);
+  };
   return (
-    <div className="table-container">
-      <button className="add-row-btn" onClick={addRow}>
-        Add New Row
-      </button>
-      <table>
-        <thead>
-          <tr>
-            <th>Column Link</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.id}
-              row={row}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
+    <>
+      <div className="table-container">
+        <button className="add-row-btn" onClick={addRow}>
+          Add New Row
+        </button>
+        <table>
+          <thead>
+            <tr>
+              <th>Column Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => {
+              const uniqueKey = getUniqueKey()
+              return <TableRow
+                key={uniqueKey}
+                row={row}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            }
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {isEdit && (
+        <EditModal 
+          link={linkRef} 
+          closeModal={() => setIsEdit(false)} 
+          updateLinks={setRows}
+          rows={rows} />
+      )}
+      {isDelete && (
+        <DeleteModal 
+          link={linkRef} 
+          closeModal={() => setIsDelete(false)} 
+          updateLinks={setRows}
+          rows={rows} />
+      )}
+      {isNew && (
+        <AddNewModal
+        closeModal={() => setIsNew(false)} 
+        updateLinks={setRows}
+        rows={rows} />
+      )}
+    </>
+  );
 }
 
-export default Table
-
+export default Table;
 
 function TableRow({ row, handleEdit, handleDelete }) {
-    return (
-        <tr key={row.id}>
-          <td>
-            <a href="#">{row.link}</a>
-          </td>
-          <td>
-            <button className="edit-btn" onClick={() => handleEdit(row.id)}>
-              Edit
-            </button>
-          </td>
-          <td>
-            <button className="delete-btn" onClick={() => handleDelete(row.id)}>
-              Delete
-            </button>
-          </td>
-        </tr>
-      );
+  return (
+    <tr key={row.id}>
+      <td>
+        <a href="#">{row.link}</a>
+      </td>
+      <td>
+        <button className="edit-btn" onClick={() => handleEdit(row)}>
+          <MdEdit />
+        </button>
+        <button className="delete-btn" onClick={() => handleDelete(row)}>
+          <MdDelete />
+        </button>
+      </td>
+    </tr>
+  );
 }
+

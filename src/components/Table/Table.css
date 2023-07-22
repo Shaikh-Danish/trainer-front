@@ -44,6 +44,10 @@
     cursor: pointer;
     border-radius: 5px;
   }
+
+  .edit-btn {
+    margin-right: 12px;
+  }
   
   .edit-btn:hover,
   .delete-btn:hover {

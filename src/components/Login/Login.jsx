@@ -9,24 +9,22 @@ import "./Login.css";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  console.log(document.cookie)
+  useEffect(() => {
+    const url = "https://trainer-portal.surajmehta6.repl.co/authenticate";
+    const authenticate = async () => {
+      const res = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
 
-  // useEffect(() => {
-  //   const url = "https://trainer-portal.surajmehta6.repl.co/authenticate";
-  //   const authenticate = async () => {
-  //     const res = await fetch(url, {
-  //       method: "GET",
-  //       credentials: "include",
-  //     });
+      console.log(res)
 
-  //     console.log(res)
-
-  //     if (res.status === 200 && res.ok) {
-  //       navigate("/dashboard");
-  //     } 
-  //   };
-  //   authenticate();
-  // }, []);
+      if (res.status === 200 && res.ok) {
+        navigate("/dashboard");
+      } 
+    };
+    authenticate();
+  }, [navigate]);
 
   const initialValues = {
     email: "",
@@ -53,10 +51,16 @@ const LoginPage = () => {
       body: JSON.stringify(data),
       credentials: "include",
     });
-    
+    // console.log(res.status);
+
     if (res.status === 200 && res.ok) {
       navigate("/");
     }
+    // console.log(response.headers)
+    // const data1 = await response.json()
+
+    // const expirationTime = new Date(Date.now() + 3600000)
+    // document.cookie = `token=${data1.token};path=/;expires=${expirationTime}`
   };
 
   return (

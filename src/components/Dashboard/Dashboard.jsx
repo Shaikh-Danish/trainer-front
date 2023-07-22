@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Table from '../Table/Table';
+import Table from "../Table/Table";
 
 function Home() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [links, setLinks] = useState([]);
 
   useEffect(() => {
     const url = "https://trainer-portal.surajmehta6.repl.co/dashboard";
@@ -14,25 +15,20 @@ function Home() {
         method: "GET",
         credentials: "include",
       });
-      const data = await res.json();
-
-      console.log(data)
+      const { data } = await res.json();
 
       if (res.status === 404 && !res.ok) {
         navigate("/login");
       } else if (res.status === 200 && res.ok) {
         setIsLoggedIn(true);
+        setLinks(data.links);
         navigate("/dashboard");
       }
     };
     authenticate();
-  }, []);
+  }, [navigate]);
 
-  return (
-    <>
-     {isLoggedIn && <Table />}
-    </>
-  )
+  return <>{isLoggedIn && <Table data={links} />}</>;
 }
 
 export default Home;
