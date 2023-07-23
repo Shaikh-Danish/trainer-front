@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useRef } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 
@@ -39,7 +38,7 @@ function Table({ data }) {
         <button className="add-row-btn" onClick={addRow}>
           Add New Row
         </button>
-        <table>
+        <table> 
           <thead>
             <tr>
               <th>Column Link</th>
@@ -48,9 +47,8 @@ function Table({ data }) {
           </thead>
           <tbody>
             {rows.map((row) => {
-              const uniqueKey = getUniqueKey()
               return <TableRow
-                key={uniqueKey}
+                key={row.id}
                 row={row}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
@@ -89,11 +87,11 @@ export default Table;
 
 function TableRow({ row, handleEdit, handleDelete }) {
   return (
-    <tr key={row.id}>
+    <tr>
       <td>
-        <a href="#">{row.link}</a>
+        <p className="link">{row.link}</p>
       </td>
-      <td>
+      <td className="action-column">
         <button className="edit-btn" onClick={() => handleEdit(row)}>
           <MdEdit />
         </button>

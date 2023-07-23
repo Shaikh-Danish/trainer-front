@@ -1,30 +1,41 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
-function Header({isLoggedIn}) {
+import LoginContext from './utils/loginContext';
+import LogoutModal from './LogoutModal';
+
+function Header() {
+    const navigate = useNavigate()
+    const [isSignOut, setIsSignOut] = useState(false)
+    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext)
+    
   return (
-    <nav>
-        <h1>
-            <Link to="/">Trainer</Link>
-        </h1>
-        <ul>
-            {isLoggedIn 
-                ? (
-                    <li>
-                        <Link to="/logout">Log out</Link>
-                    </li>
-                ) : (
-                    <>
+    <>
+        <nav>
+            <h1>
+                <Link to="/">Trainer</Link>
+            </h1>
+            <ul>
+                {isLoggedIn 
+                    ? (
                         <li>
-                            <Link to="/login">Log in</Link>
+                            <Link className='logout' onClick={() => setIsSignOut(true)}>Log out</Link>
                         </li>
-                        <li>
-                            <Link to="/signup" className="signup">Sign up</Link>
-                        </li>
-                    </>
-                )
-            }
-        </ul>
-    </nav>
+                    ) : (
+                        <>
+                            <li>
+                                <Link to="/login">Log in</Link>
+                            </li>
+                            <li>
+                                <Link to="/signup" className="signup">Sign up</Link>
+                            </li>
+                        </>
+                    )
+                }
+            </ul>
+        </nav>
+        {isSignOut && <LogoutModal closeModal={() => setIsSignOut(false)}/>}
+    </>
   )
 }
 

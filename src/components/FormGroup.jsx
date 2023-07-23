@@ -1,16 +1,16 @@
 import {  Field, ErrorMessage } from "formik"
 
-function FormGroup({formName}) {
+function FormGroup({formName, type}) {
     let name = formName.toLowerCase()
 
     if (formName.split(" ").length > 1) {
-        name = formName.split(" ").join("-")
+        name = name.split(" ").join("")
     }
 
     return (
         <div className="form-group">
             <label htmlFor={name}>{formName}</label>
-            <Field type="text" name={name} />
+            <Field type={type} name={name} />
             <ErrorMessage
             name={name}
             component="div"

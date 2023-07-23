@@ -1,33 +1,50 @@
-// import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom"; 
 
-// import Dashboard from "../Dashboard/Dashboard";
+import Table from "./Table";
+import LoginContext from "./utils/loginContext";
+import Loader from "./Loader";
 
 function Home() {
-  const navigate = useNavigate();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [links, setLinks] = useState([]);
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext)
+  const [loading, setLoading] = useState(true)
+  
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const url = "https://trainer-portal.surajmehta6.repl.co/authenticate";
-    const authenticate = async () => {
+    if (!isLoggedIn) <Navigate to="/login" />
+
+    const url = "https://trainer-portal.surajmehta6.repl.co/api/v1/links";
+
+    const getLinks = async () => {
       const res = await fetch(url, {
         method: "GET",
         credentials: "include",
       });
 
-      if (res.status === 404 && !res.ok) {
-        navigate("/login");
-      } else if (res.status === 200 && res.ok) {
-        // setIsLoggedIn(true);
-        navigate("/Dashboard");
+      if (res.status === 401 && !res.ok) {
+        navigate("/login")
+      }
+
+      const { data } = await res.json();
+
+      if (res.status === 200 && res.ok) {
+        setIsLoggedIn(true);
+        setLoading(false)
+        setLinks(data.links);
       }
     };
-    authenticate();
-  }, []);
 
+    getLinks();
+  }, []);
+  
   return (
     <>
-     
+      {loading
+        ? <Loader />
+        : links.length > 0 && <Table data={links} />
+      }
     </>
   )
 }

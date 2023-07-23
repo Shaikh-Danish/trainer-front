@@ -85,9 +85,7 @@ form h2 {
 }
 
 form {
-  width: 360px;
   margin: 0 auto;
-  padding: 30px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background: #fff;
@@ -103,6 +101,7 @@ input {
 
 label {
   display: block;
+  font-weight: 700;
   margin: 15px 0 10px;
 }
 
@@ -114,7 +113,6 @@ button {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 0.8em;
-  display: block;
   padding: 10px 16px;
   cursor: pointer;
   letter-spacing: 2px;
@@ -127,69 +125,15 @@ button {
   font-weight: bold;
 }
 
-.signUp {
-  background-color: red;
-  color: greenyellow;
+.logout, .sign-up {
+  background-color: #f9df8e;
+  color: black;
+  border-radius: 36px;
 }
 
 /* Login */
 /* Dashboard */
-.tableContainer {
-  padding: 20px;
-  text-align: center;
-}
-
-.tableContainer table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.tableContainer th, .tableContainer td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.tableContainer th {
-  background-color: #f2f2f2;
-}
-
-.addRowBtn {
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.addRowBtn:hover {
-  background-color: #4caf50;
-}
-
-.editBtn, .deleteBtn {
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.editBtn {
-  margin-right: 12px;
-}
-
-.editBtn:hover, .deleteBtn:hover {
-  background-color: #0b7dda;
-}
-
-/* Dashboard */
-/* Table */
-.tableContainer {
+.table-container {
   padding: 20px;
   text-align: center;
 }
@@ -209,42 +153,104 @@ th {
   background-color: #f2f2f2;
 }
 
-.addRowBtn {
+.add-row-btn {
   padding: 10px 15px;
   font-size: 16px;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #f9df8e;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-left: auto;
+}
+
+.add-row-btn:hover {
+  background-color: #f9df8e;
+}
+
+.edit-btn, .delete-btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #f9df8e;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-btn {
+  margin-right: 12px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  background-color: #f9df8e;
+}
+
+.action-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dashboard */
+/* Table */
+.table-container {
+  padding: 20px;
+  text-align: center;
+  margin: auto;
+  width: 1200px;
+  max-width: 1200px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f9df8e;
+}
+
+.add-row-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #f9df8e;
+  color: black;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
-.addRowBtn:hover {
-  background-color: #45a049;
-}
-
-.editBtn, .deleteBtn {
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #2196f3;
-  color: #fff;
+.edit-btn, .delete-btn {
+  padding: 7px 14px;
+  font-size: 16px;
+  background-color: #f9df8e;
+  color: black;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transform: translateY(-50%);
 }
 
-.editBtn {
+.edit-btn {
   margin-right: 12px;
 }
 
-.editBtn:hover, .deleteBtn:hover {
-  background-color: #0b7dda;
+.edit-btn:hover, .delete-btn:hover {
+  background-color: #f9df8e;
 }
 
 /* Table */
 /* Modal */
-.modalContainer {
+.modal-container {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   inset: 0 0 0 0;
@@ -263,7 +269,7 @@ th {
   max-width: 500px;
 }
 
-.editBox {
+.edit-box {
   margin-top: 1em;
 }
 
@@ -273,7 +279,7 @@ th {
   margin-top: 1em;
 }
 
-.contactInput {
+.contact-input {
   margin-bottom: 1em;
   padding: 0.4em;
 }
@@ -287,4 +293,30 @@ th {
   font-size: 1.1rem;
 }
 
-/* Modal *//*# sourceMappingURL=App.css.map */
+/* Modal */
+/* Loader Animation */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Loader Animation *//*# sourceMappingURL=App.css.map */

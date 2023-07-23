@@ -1,27 +1,34 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, } from "react-router-dom";
+import { useEffect, useContext } from "react";
 
+import LoginContext from "./utils/loginContext";
 import FormGroup from "./FormGroup";
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext)
 
+  console.log(isLoggedIn, "login")
+  
   useEffect(() => {
-    const url = "https://trainer-portal.surajmehta6.repl.co/authenticate";
-    const authenticate = async () => {
-      const res = await fetch(url, {
-        method: "GET",
-        credentials: "include",
-      });
+    if (isLoggedIn) navigate("/");
+    
+    // const url = "https://trainer-portal.surajmehta6.repl.co/authenticate";
+    // const authenticate = async () => {
+    //   const res = await fetch(url, {
+    //     method: "GET",
+    //     credentials: "include",
+    //   });
 
-      if (res.status === 200 && res.ok) {
-        navigate("/");
-      } 
-    };
-    authenticate();
+    //   if (res.status === 200 && res.ok) {
+    //     setIsLoggedIn(true) 
+    //     return navigate("/");
+    //   } 
+    // };
+    // authenticate();
   }, [navigate]);
 
   const initialValues = {
@@ -65,8 +72,8 @@ const LoginPage = () => {
         >
           <Form>
           <h2>Login</h2>
-            <FormGroup formName="Email" />
-            <FormGroup formName="Password" />
+            <FormGroup formName="Email" type="email" />
+            <FormGroup formName="Password" type="password" />
             <button type="submit" className="login">Login</button>
           </Form>
         </Formik>

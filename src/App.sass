@@ -1,24 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap")
 
-
 /* Variables */
-
-$clrWhite: #fff
-$clrBlack: black
-$clrPaleYellow: #f9df8e
-$clrLightGray: #fafafa
-$clrDarkGray: #444
-$clrSilverSmokeGray: #ddd
-$clrMagenta: #ff0099
-$clrLimeGreen: #4caf50
-$clrDodgerBlue: #2196f3
-$clrDeepSkyBlue: #0b7dda
-
+$clr-white: #fff
+$clr-black: black
+$clr-pale-yellow: #f9df8e
+$clr-light-gray: #fafafa
+$clr-dark-gray: #444
+$clr-silver-smoke-gray: #ddd
+$clr-magenta: #ff0099
+$clr-lime-green: #4caf50
+$clr-dodger-blue: #2196f3
+$clr-deep-sky-blue: #0b7dda
 /* Variables */
-
 
 /* CSS reset */
-
 *
   box-sizing: border-box
   margin: 0
@@ -28,25 +23,22 @@ $clrDeepSkyBlue: #0b7dda
 body
   font-size: 1.2rem
   letter-spacing: 1px
-  background: $clrLightGray
+  background: $clr-light-gray
 
 h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer
   margin: 0
   padding: 0
   font-family: "Quicksand", sans-serif
-  color: $clrDarkGray
+  color: $clr-dark-gray
 
 ul
   list-style-type: none
 
 a
   text-decoration: none
-
 /* CSS reset */
 
-
 /* Header */
-
 nav
   display: flex
   justify-content: space-between
@@ -70,13 +62,10 @@ nav li a
 
 .signup
   border-radius: 36px
-  background-color: $clrPaleYellow
-
+  background-color: $clr-pale-yellow
 /* Header */
 
-
 /* Login */
-
 .login-page,
 .signup-page
   width: 100vw
@@ -87,7 +76,7 @@ nav li a
 
 .btn
   border-radius: 36px
-  background: $clrPaleYellow
+  background: $clr-pale-yellow
 
 form h2
   font-size: 2em
@@ -95,12 +84,10 @@ form h2
   margin-bottom: 40px
 
 form
-  width: 360px
   margin: 0 auto
-  padding: 30px
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1)
   border-radius: 10px
-  background: $clrWhite
+  background: $clr-white
 
 input
   padding: 6px 12px
@@ -111,85 +98,39 @@ input
 
 label
   display: block
+  font-weight: 700
   margin: 15px 0 10px
 
 button
   margin-top: 30px
+  // margin-right: auto
+  // margin-left: auto
   border-radius: 36px
-  background: $clrPaleYellow
+  background: $clr-pale-yellow
   border: 0
   text-transform: uppercase
   font-weight: 700
   font-size: 0.8em
-  display: block
   padding: 10px 16px
   cursor: pointer
   letter-spacing: 2px
 
 .error
-  color: $clrMagenta
+  color: $clr-magenta
   margin: 10px 2px
   font-size: 0.8em
   font-weight: bold
 
-.signUp
-  background-color: red
-  color: greenyellow
+.logout, .sign-up
+  background-color: $clr-pale-yellow
+  color: $clr-black
+  border-radius: 36px
 
 /* Login */
 
 
 /* Dashboard */
-
-.tableContainer
-  padding: 20px
-  text-align: center
-
-.tableContainer table
-  width: 100%
-  border-collapse: collapse
-  margin-top: 20px
-
-.tableContainer th, .tableContainer td
-  padding: 10px
-  border-bottom: 1px solid $clrSilverSmokeGray
-
-.tableContainer th
-  background-color: #f2f2f2
-
-.addRowBtn
-  padding: 10px 15px
-  font-size: 16px
-  background-color: $clrLimeGreen
-  color: $clrWhite
-  border: none
-  cursor: pointer
-  border-radius: 5px
-  margin-bottom: 10px
-
-.addRowBtn:hover
-  background-color: $clrLimeGreen
-
-.editBtn, .deleteBtn
-  padding: 5px 10px
-  font-size: 14px
-  background-color: $clrDodgerBlue
-  color: $clrWhite
-  border: none
-  cursor: pointer
-  border-radius: 5px
-
-.editBtn
-  margin-right: 12px
-
-.editBtn:hover, .deleteBtn:hover
-  background-color: $clrDeepSkyBlue
-
-/* Dashboard */
-
-
-/* Table */
-.tableContainer
+.table-container
   padding: 20px
   text-align: center
 
@@ -200,50 +141,106 @@ table
 
 th, td
   padding: 10px
-  border-bottom: 1px solid #ddd
+  border-bottom: 1px solid $clr-silver-smoke-gray
 
 th
   background-color: #f2f2f2
 
-.addRowBtn
+.add-row-btn
   padding: 10px 15px
   font-size: 16px
-  background-color: #4caf50
-  color: #fff
+  background-color: $clr-pale-yellow
+  color: $clr-black
+  border: none
+  cursor: pointer
+  border-radius: 5px
+  margin-bottom: 10px
+  margin-left: auto
+
+.add-row-btn:hover
+  background-color: $clr-pale-yellow
+
+.edit-btn, .delete-btn
+  padding: 5px 10px
+  font-size: 14px
+  background-color: $clr-pale-yellow
+  color: $clr-black
+  border: none
+  cursor: pointer
+  border-radius: 5px
+
+.edit-btn
+  margin-right: 12px
+
+.edit-btn:hover, .delete-btn:hover
+  background-color: $clr-pale-yellow
+
+.action-column 
+  display: flex
+  align-items: center
+  justify-content: center
+/* Dashboard */
+
+/* Table */
+.table-container
+  padding: 20px
+  text-align: center
+  margin: auto
+  width: 1200px
+  max-width: 1200px
+
+table
+  width: 100%
+  border-collapse: collapse
+  margin-top: 20px
+
+th, td
+  padding: 5px
+  border-bottom: 1px solid $clr-silver-smoke-gray
+
+th
+  background-color: $clr-pale-yellow
+
+.add-row-btn
+  padding: 10px 15px
+  font-size: 16px
+  background-color: $clr-pale-yellow
+  color: $clr-black
   border: none
   cursor: pointer
   border-radius: 5px
   margin-bottom: 10px
 
-.addRowBtn:hover
-  background-color: #45a049
+  // .add-row-btn:hover
+  // background-color: $clr-pale-yellow
 
-.editBtn, .deleteBtn
-  padding: 5px 10px
-  font-size: 14px
-  background-color: #2196f3
-  color: #fff
+.edit-btn, .delete-btn
+  padding: 7px 14px
+  font-size: 16px
+  background-color: $clr-pale-yellow
+  color: $clr-black
   border: none
   cursor: pointer
   border-radius: 5px
+  transform: translateY(-50%)
 
-.editBtn
+.edit-btn
   margin-right: 12px
 
-.editBtn:hover, .deleteBtn:hover
-  background-color: #0b7dda
+.edit-btn:hover, .delete-btn:hover
+  background-color: $clr-pale-yellow
 
 /* Table */
 
 
 /* Modal */
-.modalContainer
+.modal-container
   background-color: rgba(0, 0, 0, 0.5)
   position: fixed
   inset: 0 0 0 0
 
 .modal
-  background-color: $clrWhite
+  background-color: $clr-white
   padding: 1em 2em
   border-radius: 0.3em
   border: none
@@ -254,7 +251,7 @@ th
   width: 90%
   max-width: 500px
 
-.editBox
+.edit-box
   margin-top: 1em
 
 .form
@@ -262,7 +259,7 @@ th
   flex-direction: column
   margin-top: 1em
 
-.contactInput
+.contact-input
   margin-bottom: 1em
   padding: 0.4em
 
@@ -274,3 +271,28 @@ th
   font-size: 1.1rem
 
 /* Modal */
+
+
+/* Loader Animation */
+
+.loader-container
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
+
+.loader
+  border: 4px solid rgba(0, 0, 0, 0.3)
+  border-top: 4px solid $clr-white
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  animation: spin 1s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+/* Loader Animation */

@@ -9,8 +9,6 @@ function DeleteModal({ link , closeModal, updateLinks, rows }) {
     id: "",
     link: ""
   };
-
-//   console.log(link)
   
   const handleSubmit = async () => {
     const url = "https://trainer-portal.surajmehta6.repl.co/delete"
@@ -29,8 +27,6 @@ function DeleteModal({ link , closeModal, updateLinks, rows }) {
     });
     const {status} = await res.json();
 
-    console.log(status);
-    
     if (status === 200) {
       rows = rows.filter(row => row.id !== link.current.id)
       updateLinks(rows)
@@ -44,8 +40,8 @@ function DeleteModal({ link , closeModal, updateLinks, rows }) {
       <h3>Are you sure you want to delete the link?</h3>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
-          <button type="submit">Yes</button>
-          <button onClick={closeModal}>No</button>
+          <button className="form-btn" type="submit">Yes</button>
+          <button className="form-btn" onClick={closeModal}>No</button>
         </Form>
       </Formik>
     </Modal>
